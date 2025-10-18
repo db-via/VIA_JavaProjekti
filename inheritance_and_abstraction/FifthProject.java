@@ -52,7 +52,7 @@ abstract class Product { //Self-explanatory what type of class this is
     public void restock(int amount) {
         if (amount > 0) {
             quantity += amount;
-            System.out.println("Restocked " + amount + ". Total quantity: " + quantity);
+            System.out.println("Restocked " + amount + ". Total quantity of this product: " + quantity);
         } else {
             System.out.println("Restock amount must be positive.");
         	}
@@ -168,7 +168,7 @@ public class FifthProject {
                     
                     int quantity2 = 0;
             		System.out.print("Enter Product Quantity: ");
-                    quantity = obj.nextInt();
+                    quantity2 = obj.nextInt();
                     obj.nextLine();
                     
                     System.out.print("Enter Product Warranty Period: ");
@@ -193,7 +193,28 @@ public class FifthProject {
 
                     break;
             	case 4:
-            		
+            		if (productCount == 0) {
+            			System.out.println("There is nothing in your inventory to restock!");
+            			break;
+            		}
+            		System.out.print("Enter Product ID to restock: ");
+            		String idToRestock = obj.nextLine();
+            		int foundIndex = -1;
+            		for (int i = 0; i < productCount; i++) {
+            			if (inventory[i].getProductId().equals(idToRestock)) {
+            				foundIndex = i;
+            				break;
+            			}
+            		}
+            		if (foundIndex == -1) {
+            			System.out.println("Product with ID '" + idToRestock + "' not found.");
+            		} else {
+            			System.out.println("Found product:");
+            			inventory[foundIndex].getProductInfo();
+            			System.out.println("Please input how much you want to restock:");
+            			int amount = obj.nextInt();
+            			inventory[foundIndex].restock(amount);
+            		}
             		break;
             	case 5:
             		System.out.println("Bye!");
