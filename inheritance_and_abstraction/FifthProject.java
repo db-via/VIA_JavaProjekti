@@ -99,8 +99,6 @@ class NonPerishableProduct extends Product {
     }
 }
 
-//These are the Method overloading... methods.
-
 public class FifthProject {
 
 	public static void main(String[] args) {
@@ -117,7 +115,7 @@ public class FifthProject {
 			System.out.println("3. Display Product Info");
 			System.out.println("4. Restock Product");
 			System.out.println("5. Exit");
-			System.out.print("CHOOSE AN OPTION FROM 1 TO 5:");
+			System.out.print("CHOOSE AN OPTION FROM 1 TO 5: ");
 			int menu_choice = 0;
 			
             try {
@@ -131,21 +129,44 @@ public class FifthProject {
             
             switch (menu_choice) {
             	case 1:
-            		System.out.print("Enter Product ID: ");
-            		String productId = obj.nextLine();
+            	    if (productCount >= inventory.length) {
+            	        System.out.println("Inventory is full!");
+            	        break;
+            	    }
+
+        	    	System.out.print("Enter Product ID: ");
+                	String productId = obj.nextLine();
+                	
+                	System.out.print("Enter Product Name: ");
+                	String name = obj.nextLine();
             		
-            		System.out.print("Enter Product Name: ");
-            		String name = obj.nextLine();
-            		
-            		double price = 0;
-            		System.out.print("Enter Product Price: ");
-                    price = obj.nextDouble();
-                    obj.nextLine();
-                    
-                    int quantity = 0;
-            		System.out.print("Enter Product Quantity: ");
-                    quantity = obj.nextInt();
-                    obj.nextLine();
+            		double price;
+                	
+                	while (true) {
+            			try {
+                        	System.out.print("Enter Product Price: ");
+                            price = obj.nextDouble();
+                            obj.nextLine();
+                            break;
+						} catch (InputMismatchException e) {
+                            System.out.println("Invalid price! Please enter a valid number.");
+                            obj.next(); // clear buffer
+						}
+            		}
+                	
+            		int quantity;
+                	
+                	while (true) {
+            			try {
+                            System.out.print("Enter Product Quantity: ");
+                            quantity = obj.nextInt();
+                            obj.nextLine();
+                            break;
+						} catch (InputMismatchException e) {
+                            System.out.println("Invalid quantity! Please enter a valid number.");
+                            obj.next(); // clear buffer
+						}
+            		}
                     
                     System.out.print("Enter Product Expiry Date: ");
                     String expiryDate = obj.nextLine();
@@ -162,14 +183,32 @@ public class FifthProject {
             		String name2 = obj.nextLine();
             		
             		double price2 = 0;
-            		System.out.print("Enter Product Price: ");
-                    price2 = obj.nextDouble();
-                    obj.nextLine();
+            		
+                	while (true) {
+            			try {
+                        	System.out.print("Enter Product Price: ");
+                            price2 = obj.nextDouble();
+                            obj.nextLine();
+                            break;
+						} catch (InputMismatchException e) {
+                            System.out.println("Invalid price! Please enter a valid number.");
+                            obj.next(); // clear buffer
+						}
+            		}
                     
                     int quantity2 = 0;
-            		System.out.print("Enter Product Quantity: ");
-                    quantity2 = obj.nextInt();
-                    obj.nextLine();
+                    
+                	while (true) {
+            			try {
+                            System.out.print("Enter Product Quantity: ");
+                            quantity2 = obj.nextInt();
+                            obj.nextLine();
+                            break;
+						} catch (InputMismatchException e) {
+                            System.out.println("Invalid quantity! Please enter a valid number.");
+                            obj.next(); // clear buffer
+						}
+            		}
                     
                     System.out.print("Enter Product Warranty Period: ");
                     String warrantyPeriod = obj.nextLine();
@@ -211,16 +250,26 @@ public class FifthProject {
             		} else {
             			System.out.println("Found product:");
             			inventory[foundIndex].getProductInfo();
-            			System.out.println("Please input how much you want to restock:");
-            			int amount = obj.nextInt();
-            			inventory[foundIndex].restock(amount);
+            			
+            			while (true) {
+            				try {
+                    			System.out.println("Please input how much you want to restock:");
+                    			int amount = obj.nextInt();
+                    			inventory[foundIndex].restock(amount);
+                    			break;
+							} catch (InputMismatchException e) {
+								System.out.println("Invalid quantity! Please enter a valid number.");
+	                            obj.next(); // clear buffer
+							}
+            			}
+
             		}
             		break;
             	case 5:
             		System.out.println("Bye!");
             		return;
             	default:
-            		System.out.println("YOU STUPID!");
+            		System.out.println("Please input a valid option!");
             		break;
             }
 			
