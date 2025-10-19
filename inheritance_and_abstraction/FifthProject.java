@@ -30,7 +30,7 @@ abstract class Product {
     public String getProductId() {
         return productId;
     }
-    
+   
     // Setter for Price with a check.
     public void setPrice(double price) {
         if (price >= 0)
@@ -152,7 +152,7 @@ public class FifthProject {
             	    }
 
         	    	System.out.print("Enter Product ID: ");
-                	String productId = obj.nextLine();
+        	    	String productId = obj.nextLine().trim();
                 	
                 	System.out.print("Enter Product Name: ");
                 	String name = obj.nextLine();
@@ -190,6 +190,8 @@ public class FifthProject {
                     System.out.print("Enter Product Expiry Date: ");
                     String expiryDate = obj.nextLine();
                     
+                    System.out.println("Product added to Inventory!");
+                    
                     // This creates a new Perishable Product and stores it in the Inventory array.
                     inventory[productCount] = new PerishableProduct(productId, name, price, quantity, expiryDate);
                     productCount++;
@@ -199,7 +201,7 @@ public class FifthProject {
             		// However different versions of the variables so that there are not duplicate variable errors.
             		// Because both cases are in the same method.
             		System.out.print("Enter Product ID: ");
-            		String productId2 = obj.nextLine();
+            		String productId2 = obj.nextLine().trim();
             		
             		System.out.print("Enter Product Name: ");
             		String name2 = obj.nextLine();
@@ -235,6 +237,8 @@ public class FifthProject {
                     System.out.print("Enter Product Warranty Period: ");
                     String warrantyPeriod = obj.nextLine();
                     
+                    System.out.println("Product added to Inventory!");
+                    
                     inventory[productCount] = new NonPerishableProduct(productId2, name2, price2, quantity2, warrantyPeriod);
                     productCount++;
             		
@@ -259,11 +263,11 @@ public class FifthProject {
             			break;
             		}
             		System.out.print("Enter Product ID to restock: ");
-            		String idToRestock = obj.nextLine();
+            		String idToRestock = obj.nextLine().trim();
             		int foundIndex = -1;
             		// Searches for the Product by ID.
             		for (int i = 0; i < productCount; i++) {
-            			if (inventory[i].getProductId() == (idToRestock)) {
+            			if (inventory[i].getProductId().equals(idToRestock)) {
             				foundIndex = i;
             				break;
             			}
@@ -277,7 +281,7 @@ public class FifthProject {
             			// Validates the amount to restock.
             			while (true) {
             				try {
-                    			System.out.println("Please input how much you want to restock:");
+                    			System.out.print("Please input how much you want to restock: ");
                     			int amount = obj.nextInt();
                     			inventory[foundIndex].restock(amount);
                     			break;
@@ -289,8 +293,8 @@ public class FifthProject {
             		}
             		break;
             	case 5:
-            		// It's time to end it!
-            		System.out.println("Bye!");
+            		// You have been targeted for Termination.
+            		System.out.println("I'll be back.");
             		return;
             	default:
             		// What's 9 + 10?
